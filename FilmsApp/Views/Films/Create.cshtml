@@ -1,0 +1,55 @@
+@model FilmCreateViewModel
+@{
+    ViewData["Title"] = "Додати фільм";
+}
+
+<h1 class="h3 mb-4">Додати фільм</h1>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="col-md-8 col-lg-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Назва</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Genre" class="form-label">Жанр</label>
+        <input asp-for="Genre" class="form-control" />
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Опис</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Poster" class="form-label">Постер</label>
+        <input asp-for="Poster" type="file" accept="image/*" class="form-control" />
+        <span asp-validation-for="Poster" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Video" class="form-label">Відеофайл або трейлер</label>
+        <input asp-for="Video" type="file" accept="video/*" class="form-control" />
+        <span asp-validation-for="Video" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit">Зберегти</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-link">Скасувати</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        //Щоб не було подвійних сабмітів
+        $("form").on("submit", function () {
+            if ($(this).valid()) {
+                $("#submit").prop("disabled", true).text("Завантаження...");
+            }
+        });
+    </script>
+}

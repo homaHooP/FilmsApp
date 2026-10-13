@@ -1,0 +1,26 @@
+@model List<FilmViewModel>
+@{
+    ViewData["Title"] = "Фільми";
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Фільмів поки немає.</p>
+}
+else
+{
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <a class="card h-100 text-decoration-none text-dark" asp-controller="Films" asp-action="Details" asp-route-id="@item.Film.Id">
+                    <img src="@item.PosterUrl" class="card-img-top poster" alt="@item.Film.Title" />
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">@item.Film.Title</h5>
+                        <span class="badge bg-secondary">@item.Film.Genre</span>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+}

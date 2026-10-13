@@ -1,0 +1,24 @@
+@model FilmViewModel
+@{
+    ViewData["Title"] = Model.Film.Title;
+}
+
+<a asp-controller="Home" asp-action="Index" class="d-inline-block mb-3">&larr; До списку</a>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <img src="@Model.PosterUrl" class="img-fluid rounded poster" alt="@Model.Film.Title" />
+    </div>
+    <div class="col-md-8">
+        <h1 class="h3">@Model.Film.Title</h1>
+        <span class="badge bg-secondary mb-3">@Model.Film.Genre</span>
+        <p class="description">@Model.Film.Description</p>
+
+        <form asp-action="Delete" asp-route-id="@Model.Film.Id" method="post"
+              data-confirm="Видалити фільм «@Model.Film.Title»?" onsubmit="return confirm(this.dataset.confirm);">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Видалити</button>
+        </form>
+    </div>
+</div>
+
+<video class="w-100 mt-4 rounded bg-black" src="@Model.VideoUrl" controls preload="metadata"></video>
